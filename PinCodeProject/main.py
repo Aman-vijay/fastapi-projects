@@ -29,7 +29,7 @@ def get_pincode(code:str):
         raise PincodeNotFoundError(code,"Pincode not found")
     return pincode_db[code]    
 
-@app.get("/pincode/bulk",response_model=BulkResponse) 
+@app.post("/pincode/bulk",response_model=BulkResponse) 
 def get_bulk_pincode(request:BulkRequest):
     results = []
     missing = []
