@@ -45,8 +45,10 @@ Thumbs.db
 
 # Logs and databases
 *.log
+*.db
 *.sqlite3
 *.sqlite3-journal
+
 
 # FastAPI / Uvicorn
 .uvicorn_cache/
