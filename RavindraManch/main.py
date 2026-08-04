@@ -1,24 +1,29 @@
-from contextlib import asynccontextmanager
 from fastapi import FastAPI
-import uvicorn
+from contextlib import asynccontextmanager
 from db import create_table
+from routes.reviews import router
+
 
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     create_table()
-    print("Database table created")
+    print("Database table has been created")
     yield
-    print("Shutting down")
+    #shutdown
+    print("Database has been shut down")
 
 
 
-app =  FastAPI(
-    title="Ravindrmanch API",
-    description="This is the api for ravindramanch with sql data",
+
+app = FastAPI(
+    title="Ravindramanch API",
+    description="This is the api for ravindramanch",
     lifespan=lifespan
 )
+
+app.include_router(router)
 
 
 @app.get("/")
 def root():
-    return {"message":"Hello this is ravindramanch api"}
+    return {"message":"Hello this is Ravindramanch Api"}

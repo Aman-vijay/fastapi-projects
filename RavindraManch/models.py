@@ -10,7 +10,6 @@ class Review(SQLModel,table = True):
     rating:int =  Field(ge=1,le=5)
     comment:str
     created_at:datetime = Field(default_factory=datetime.now)
-    updated_At:datetime = Field(default_factory=datetime.now)
 
 class ReviewCreate(SQLModel):
     play_name:str
@@ -30,5 +29,8 @@ class ReviewUpdate(SQLModel):
     rating:Optional[int] = Field(default=None,ge=1,le=5)    
     comment: Optional[str] =  None
 
+
+class ReviewDelete(SQLModel):
+    id:int
 
             
