@@ -1,16 +1,17 @@
 from fastapi import FastAPI
 import uvicorn
-from db import create_tables, drop_tables
+from db import create_tables
 from sqlmodel import Session
 from contextlib import asynccontextmanager
+from routes.users import users_router
+from routes.books import books_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_tables()
     print("Tables created")
     yield
-    print("Tables dropped")
-    drop_tables()
+
 
 app = FastAPI(
     title="BookExchange Api", 
@@ -21,6 +22,9 @@ app = FastAPI(
     openapi_url="/openapi.json",
     lifespan=lifespan,
 )
+
+app.include_router(users_router)
+app.include_router(books_router)
 
 @app.get("/")
 def read_root():
